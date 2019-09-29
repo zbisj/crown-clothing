@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import './App.css'
 import { setCurrentUser } from './redux/actions/UserActions'
@@ -39,7 +39,7 @@ class App extends React.Component {
       };
       // the code below will run only if there is no user signed in and the onAuthStateChanged function will return null as the value of userAuth there the code below is equivalent to:
       // this.setState({ currentUser: null})
-      setCurrentUser({ currentUser: userAuth});
+      setCurrentUser(userAuth);
 
     });
 
@@ -52,6 +52,8 @@ class App extends React.Component {
 
   render() {
 
+    const { currentUser } = this.props;
+
     return (
 
       <div>
@@ -59,7 +61,13 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={ HomePage } />
           <Route path="/shop" component={ ShopPage } />
-          <Route path="/signin" component={ Auth } />
+          <Route
+            exact
+            path="/signin"
+            render={
+              () => currentUser ? <Redirect to="/" /> : <Auth />
+            }
+          />
         </Switch>
       </div>
     );
@@ -68,8 +76,13 @@ class App extends React.Component {
 
 };
 
+// we are destructing user from state via ({user})
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
-})
+});
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect( mapStateToProps, mapDispatchToProps)(App);
