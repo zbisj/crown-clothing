@@ -1,5 +1,5 @@
 import React from 'react';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
 import Button from '../button/Button';
@@ -17,12 +17,22 @@ class SignIn extends React.Component {
 
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    this.setState({
-      email: '',
-      password: ''
-    })
+
+    const { email, password } = this.state;
+
+    try {
+      
+      // signin with emai and passowrd
+      await auth.signInWithEmailAndPassword(email, password);
+      // clearing state
+      this.setState({email: '', password: ''})
+
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
 
@@ -62,7 +72,7 @@ class SignIn extends React.Component {
             value={this.state.password}
             handleChange={ this.handleChange }
           />
-        
+
           <div className="buttons">
             <Button type="submit">Sign In</ Button>
             <Button

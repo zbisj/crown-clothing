@@ -23,6 +23,7 @@ class App extends React.Component {
   componentDidMount() {
     // changing unsubcribeFromAuth from null to the connect state to the current signed in user when the this App component is mounted to the DOM
     this.unsubcribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+
       if (userAuth) {
 
         // userRef here points to the document for logged in user
@@ -30,20 +31,22 @@ class App extends React.Component {
 
         // we are now getting the actual data within the document and using it to set state for the app
         userRef.onSnapshot(snapshot => {
+
           this.setState({
             id: snapshot.id,
             ...snapshot.data()
-          })
-          console.log(this.state);
-        })
+          });
 
-      }
+        });
+
+      };
       // the code below will run only if there is no user signed in and the onAuthStateChanged function will return null as the value of userAuth there the code below is equivalent to:
       // this.setState({ currentUser: null})
-      this.setState({ currentUser: userAuth})
+      this.setState({ currentUser: userAuth});
 
-    })
-  }
+    });
+
+  };
 
   // hen the this App component is unmounted from the DOM we kill or unsubcribe the connection to the google auth serives to avoid data leaks
   componentWillUnmount() {
@@ -64,7 +67,7 @@ class App extends React.Component {
       </div>
     );
 
-  }
+  };
 
 };
 
