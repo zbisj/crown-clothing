@@ -36,9 +36,9 @@ const Header = ({currentUser, hidden}) => (
         )
       }
 
-      <Link className="option" to="/contact">
+      <div className="option">
         <CartIcon />
-      </Link>
+      </div>
 
     </div>
 
@@ -50,9 +50,11 @@ const Header = ({currentUser, hidden}) => (
 
 );
 
-const mapStateToProps = state => ({
-  hidden: state.cart.hidden,
-  currentUser: state.user.currentUser
-})
+const mapStateToProps = state => (
+  {
+    hidden: state.cart.hidden,
+    currentUser: state.user.currentUser
+  }
+);
 
 export default connect(mapStateToProps)(Header);
