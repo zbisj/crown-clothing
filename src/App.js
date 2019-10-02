@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import './App.css'
-import { setCurrentUser } from './redux/actions/UserActions'
-import HomePage from './pages/homepage/HomePage';
+import Auth from './components/auth/Auth';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
-import Auth from './components/auth/Auth';
+import HomePage from './pages/homepage/HomePage';
+import CheckoutPage from './pages/checkout/CheckoutPage';
+
+import { setCurrentUser } from './redux/actions/UserActions'
+import { selectCurrentUser } from './redux/selectors/UserSelectors'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 class App extends React.Component {
@@ -61,6 +65,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={ HomePage } />
           <Route path="/shop" component={ ShopPage } />
+          <Route exact path="/checkout" component={ CheckoutPage } />
           <Route
             exact
             path="/signin"
@@ -77,9 +82,9 @@ class App extends React.Component {
 };
 
 // we are destructing user from state via ({user})
-const mapStateToProps = ({ user }) => (
+const mapStateToProps = createStructuredSelector(
   {
-    currentUser: user.currentUser
+    currentUser: selectCurrentUser
   }
 );
 

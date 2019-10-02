@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './cart-icon.styles.scss';
 import { selectCartItemsCount } from '../../redux/selectors/CartSelectors';
@@ -22,13 +23,13 @@ const mapDispatchToProps = dispatch => (
 );
 
 
-const mapStateToProps = state => (
+const mapStateToProps = createStructuredSelector(
   // using the reduce function, we initiate itemCount as 0 wich is the same as or equal to the accumulatedQuantity then we add on it all the quantities of items in the cart
   // so the first item quantity value will be added to 0, then the second quantity will be added to the first one plus zero and so on
   // that is then assigned to the itemCount property
-  console.log('mma'),
+
   {
-    itemCount: selectCartItemsCount(state)
+    itemCount: selectCartItemsCount 
   }
 );
 
