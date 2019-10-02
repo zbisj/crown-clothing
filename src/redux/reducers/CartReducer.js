@@ -1,5 +1,5 @@
 
-import { addItemtoCart } from '../../utils/cart.utils'
+import { addItemtoCart, removeItemFromCart } from '../../utils/cart.utils'
 
 const INITIAL_STATE = {
   hidden: true,
@@ -18,6 +18,19 @@ const CartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: addItemtoCart(state.cartItems, action.payload)
+      };
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload)
+      };
+    case 'CLEAR_ITEM_FROM_CART':
+      return {
+        ...state,
+        // we are keeping only the cart items with id's that dont match the id in the payload and filtering out the matching ones
+        cartItems: state.cartItems.filter(
+          cartItem => cartItem.id !== action.payload.id
+        )
       };
     default:
       return state;
