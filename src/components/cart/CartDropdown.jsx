@@ -13,7 +13,7 @@ import { toggleCartHidden } from '../../redux/actions/CartActions';
 
 const CartDropdown = ({cartItems, history, dispatch}) => (
   <div className="cart-dropdown">
-    <div className="cart-times">
+    <div className="cart-items">
       {
         cartItems.length ? (
           cartItems.map(cartItem => (
