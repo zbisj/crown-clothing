@@ -9,10 +9,11 @@ import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import HomePage from './pages/homepage/HomePage';
 import CheckoutPage from './pages/checkout/CheckoutPage';
-
 import { setCurrentUser } from './redux/actions/UserActions'
 import { selectCurrentUser } from './redux/selectors/UserSelectors'
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import {
+  auth, createUserProfileDocument
+ } from './firebase/firebase.utils';
 
 class App extends React.Component {
 
@@ -90,7 +91,7 @@ const mapStateToProps = createStructuredSelector(
 
 const mapDispatchToProps = dispatch => (
   {
-    setCurrentUser: user => dispatch(setCurrentUser(user))
+    setCurrentUser: user => dispatch(setCurrentUser(user)),
   }
 );
 

@@ -10,7 +10,6 @@ import {
   CartItemsContainer
 } from './cart-dropdown.styles'
 
-import Button from '../button/Button';
 import CartItem from '../cart/CartItem';
 
 import { selectCartItems } from '../../redux/selectors/CartSelectors';

@@ -51,12 +51,49 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
 
 }
 
+//
+export const addCollectionAndDocuments = async(collectionName, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionName);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj)
+  });
+
+  return await batch.commit()
+}
+
+export const convertCollectionsSnapshotsToMap = (collections) => {
+  // looping throught the 'collections' querySnapshot or collectionSnaphot to get individual collection and destruting 'title' and 'items'
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    // we then return an object with the destruted values to 'id' from the querySnapshot and 'routeName' wich is transformed to be URL compatible
+    return {
+      title,
+      items,
+      id: doc.id,
+      routeName: encodeURI(title.toLowerCase()),
+    }
+  })
+
+  // converting the transformedCollection from an array to an object
+  // this creates an object of objects where each object's key is that objects title
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {})
+}
+
+
 // using the above config to connect our Firebase app to our codebase
 firebase.initializeApp(config);
 
 // exprting auth and firestore to be used in globally in the app
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+
 
 // setting up Google Auth Provider
 const provider = new firebase.auth.GoogleAuthProvider();

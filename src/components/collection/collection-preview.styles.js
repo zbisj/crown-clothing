@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom'
 export const PreviewContainer = styled.div`
 
   display: flex;
@@ -12,6 +12,7 @@ export const Title = styled.h1`
 
   font-size: 28px;
   margin-bottom: 25px;
+  color: red;
 
 `;
 
