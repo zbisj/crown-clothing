@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import styled from 'styled-components'; 
 export const PreviewContainer = styled.div`
 
   display: flex;

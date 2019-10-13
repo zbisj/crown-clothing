@@ -64,7 +64,7 @@ export const addCollectionAndDocuments = async(collectionName, objectsToAdd) => 
   return await batch.commit()
 }
 
-export const convertCollectionsSnapshotsToMap = (collections) => {
+export const convertCollectionsSnapshotToMap = (collections) => {
   // looping throught the 'collections' querySnapshot or collectionSnaphot to get individual collection and destruting 'title' and 'items'
   const transformedCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
