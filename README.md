@@ -10,7 +10,7 @@
     - [Axios](https://www.npmjs.com/package/axios) (API quiries)
     - [Stripe](https://stripe.com/) (digital payments processor)
     - [NodeJS](https://nodejs.org/) (back-end javascript runtime environment that runs outside a browser)
-    - [Express](https://expressjs.com/) (microservice API routes and servers)
+    - [Express](https://expressjs.com/) (server)
     - [Firebase](https://firebase.google.com/) (Backend as a service platform)
     - [Styled Components](https://www.styled-components.com/) (writes actual CSS in javascript)
     
