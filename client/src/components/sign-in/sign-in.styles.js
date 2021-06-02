@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+
+export const ErrorMessage = styled.span`
+  color: red;
+`;
 
 export const SignInContainer = styled.div`
   width: 380px;
